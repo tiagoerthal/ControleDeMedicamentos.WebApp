@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35931.197 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeMedicamentos.WebApp", "ControleDeMedicamentos.WebApp\ControleDeMedicamentos.WebApp.csproj", "{B9366702-6244-4B9D-A48D-A9870C39859E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Apresentação", "1. Apresentação", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domínio", "2. Domínio", "{7070E667-9AD3-46F4-A10E-4337E78F1D02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Infraestrutura", "3. Infraestrutura", "{0C1067F5-81C6-4C5E-8C31-8FE12A825AAB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9366702-6244-4B9D-A48D-A9870C39859E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9366702-6244-4B9D-A48D-A9870C39859E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9366702-6244-4B9D-A48D-A9870C39859E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9366702-6244-4B9D-A48D-A9870C39859E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9366702-6244-4B9D-A48D-A9870C39859E} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8152A105-530C-43A3-ACB9-CB37207FB5BE}
+	EndGlobalSection
+EndGlobal
