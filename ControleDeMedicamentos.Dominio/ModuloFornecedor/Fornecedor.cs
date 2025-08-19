@@ -7,24 +7,25 @@
 //public class Fornecedor : EntidadeBase<Fornecedor>
 //{
 //    public string Nome { get; set; }
-//    public string Telefone { get; set; }
-//    public string Cpf { get; set; }
+//    public string Descricao { get; set; }
+//    public string QuantidadeEmEstoque { get; set; }
+//   //Forncedor Forncedor
 
 //    protected Fornecedor() { }
 
-//    public Fornecedor(string nome, string telefone, string cpf) : this()
+//    public Fornecedor(string nome, string descricao, string quantidadeEmEstoque) : this()
 //    {
 //        Id = Guid.NewGuid();
 //        Nome = nome;
-//        Telefone = telefone;
-//        Cpf = cpf;
+//        Descricao = descricao;
+//        QuantidadeEmEstoque = quantidadeEmEstoque;
 //    }
 
 //    public override void AtualizarRegistro(Fornecedor registroEditado)
 //    {
 //        Nome = registroEditado.Nome;
-//        Telefone = registroEditado.Telefone;
-//        Cpf = registroEditado.Cpf;
+//        Descricao = registroEditado.Descricao;
+//        QuantidadeEmEstoque = registroEditado.QuantidadeEmEstoque;
 //    }
 
 //    public override string Validar()
@@ -37,17 +38,17 @@
 //        else if (Nome.Length < 2 || Nome.Length > 100)
 //            erros += "O campo 'Nome' deve conter entre 2 e 100 caracteres.\n";
 
-//        if (string.IsNullOrWhiteSpace(Telefone))
-//            erros += "O campo 'Telefone' é obrigatório.\n";
+//        if (string.IsNullOrWhiteSpace(Descricao))
+//            erros += "O campo 'Descricao' é obrigatório.\n";
 
-//        else if (!Regex.IsMatch(Telefone, @"^\(?\d{2}\)?\s?(9\d{4}|\d{4})-?\d{4}$"))
-//            erros += "O campo 'Telefone' deve seguir o padrão (DDD) 0000-0000 ou (DDD) 00000-0000.\n";
+//        else if (Descricao.Length < 2 || Descricao.Length > 100)
+//            erros += "O campo 'Descricao' deve conter entre 2 e 100 caracteres.\n";
 
-//        if (string.IsNullOrWhiteSpace(Cpf))
-//            erros += "O campo 'CPF' é obrigatório.\n";
+//        if (string.IsNullOrWhiteSpace(QuantidadeEmEstoque))
+//            erros += "O campo 'Quantidade em estoque' é obrigatório.\n";
 
-//        else if (!Regex.IsMatch(Cpf, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
-//            erros += "O campo 'CPF' deve seguir o formato 000.000.000-00.\n";
+//        else if (!Regex.IsMatch(QuantidadeEmEstoque, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
+//            erros += "O campo 'Quantidade em estoque' deve .\n";
 
 //        return erros;
 //    }
