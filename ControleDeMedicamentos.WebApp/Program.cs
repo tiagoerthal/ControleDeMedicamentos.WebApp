@@ -1,7 +1,8 @@
 using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFuncionario;
-using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloMedicamento;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPaciente;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloMedicamento;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFuncionario;
 
 namespace ControleDeMedicamentos.WebApp;
 
@@ -15,9 +16,10 @@ public class Program
 
 
         builder.Services.AddScoped(ConfigurarContextoDados);
+        builder.Services.AddScoped<RepositorioFornecedorEmArquivo>();
         builder.Services.AddScoped<RepositorioPacienteEmArquivo>();          // Injeta uma instância do serviço por requisição (ação) HTTP, essa instância acompanha a requisição do cliente
-        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();
         builder.Services.AddScoped<RepositorioMedicamentoEmArquivo>();
+        builder.Services.AddScoped<RepositorioFuncionarioEmArquivo>();
 
 
 

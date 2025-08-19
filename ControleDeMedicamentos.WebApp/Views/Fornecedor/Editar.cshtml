@@ -1,8 +1,8 @@
-﻿@{
-    ViewBag.Titulo = "Edição de Pacientes";
+﻿﻿﻿@{
+    ViewBag.Titulo = "Edição de Fornecedores";
 }
 
-@model EditarPacienteViewModel;
+@model EditarFornecedorViewModel;
 
 <div class="row justify-content-center">
     <form class="col-lg-8 col-xl-6" asp-action="Editar" method="post">
@@ -18,11 +18,11 @@
             <span asp-validation-for="Telefone" class="text-danger"></span>
         </div>
 
-        <div class="mb-3">
-            <label asp-for="CartaoDoSus" class="form-label">CartaoDoSus</label>
-            <input class="form-control" asp-for="CartaoDoSus">
-            <span asp-validation-for="CartaoDoSus" class="text-danger"></span>
-        </div>
+        @* <div class="mb-3"> *@
+        @*     <label asp-for="Cnpj" class="form-label">Cnpj</label> *@
+        @*     <input class="form-control" asp-for="Cnpj"> *@
+        @*     <span asp-validation-for="Cnpj" class="text-danger"></span> *@
+        @* </div> *@
 
         <div class="mb-3">
             <label asp-for="Cpf" class="form-label">CPF</label>

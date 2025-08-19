@@ -1,55 +1,54 @@
-﻿//using ControleDeMedicamentos.Dominio.Compartilhado;
-//using System.Diagnostics.CodeAnalysis;
-//using System.Text.RegularExpressions;
+﻿using ControleDeMedicamentos.Dominio.Compartilhado;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.RegularExpressions;
 
-//namespace ControleDeMedicamentos.Dominio.ModuloFuncionario;
+namespace ControleDeMedicamentos.Dominio.ModuloFornecedor;
 
-//public class Fornecedor : EntidadeBase<Fornecedor>
-//{
-//    public string Nome { get; set; }
-//    public string Descricao { get; set; }
-//    public string QuantidadeEmEstoque { get; set; }
-//   //Forncedor Forncedor
+public class Fornecedor : EntidadeBase<Fornecedor>
+{
+    public string Nome { get; set; }
+    public string Telefone { get; set; }
+    public string Cnpj { get; set; }
 
-//    protected Fornecedor() { }
+    protected Fornecedor() { }
 
-//    public Fornecedor(string nome, string descricao, string quantidadeEmEstoque) : this()
-//    {
-//        Id = Guid.NewGuid();
-//        Nome = nome;
-//        Descricao = descricao;
-//        QuantidadeEmEstoque = quantidadeEmEstoque;
-//    }
+    public Fornecedor(string nome, string telefone, string cnpj) : this()
+    {
+        Id = Guid.NewGuid();
+        Nome = nome;
+        Telefone = telefone;
+        Cnpj = cnpj;
+    }
 
-//    public override void AtualizarRegistro(Fornecedor registroEditado)
-//    {
-//        Nome = registroEditado.Nome;
-//        Descricao = registroEditado.Descricao;
-//        QuantidadeEmEstoque = registroEditado.QuantidadeEmEstoque;
-//    }
+    public override void AtualizarRegistro(Fornecedor registroEditado)
+    {
+        Nome = registroEditado.Nome;
+        Telefone = registroEditado.Telefone;
+        Cnpj = registroEditado.Cnpj;
+    }
 
-//    public override string Validar()
-//    {
-//        string erros = "";
+    public override string Validar()
+    {
+        string erros = "";
 
-//        if (string.IsNullOrWhiteSpace(Nome))
-//            erros += "O campo 'Nome' é obrigatório.\n";
+        if (string.IsNullOrWhiteSpace(Nome))
+            erros += "O campo 'Nome' é obrigatório.\n";
 
-//        else if (Nome.Length < 2 || Nome.Length > 100)
-//            erros += "O campo 'Nome' deve conter entre 2 e 100 caracteres.\n";
+        else if (Nome.Length < 2 || Nome.Length > 100)
+            erros += "O campo 'Nome' deve conter entre 2 e 100 caracteres.\n";
 
-//        if (string.IsNullOrWhiteSpace(Descricao))
-//            erros += "O campo 'Descricao' é obrigatório.\n";
+        if (string.IsNullOrWhiteSpace(Telefone))
+            erros += "O campo 'Telefone' é obrigatório.\n";
 
-//        else if (Descricao.Length < 2 || Descricao.Length > 100)
-//            erros += "O campo 'Descricao' deve conter entre 2 e 100 caracteres.\n";
+        else if (!Regex.IsMatch(Telefone, @"^\(?\d{2}\)?\s?(9\d{4}|\d{4})-?\d{4}$"))
+            erros += "O campo 'Telefone' deve seguir o padrão (DDD) 0000-0000 ou (DDD) 00000-0000.\n";
 
-//        if (string.IsNullOrWhiteSpace(QuantidadeEmEstoque))
-//            erros += "O campo 'Quantidade em estoque' é obrigatório.\n";
+        if (string.IsNullOrWhiteSpace(Cnpj))
+            erros += "O campo 'CPF' é obrigatório.\n";
 
-//        else if (!Regex.IsMatch(QuantidadeEmEstoque, @"^\d{3}\.\d{3}\.\d{3}-\d{2}$"))
-//            erros += "O campo 'Quantidade em estoque' deve .\n";
+        else if (Nome.Length < 13 || Nome.Length > 15)
+            erros += "O campo 'CPF' deve seguir o formato 14 dígitos.\n";
 
-//        return erros;
-//    }
-//}
+        return erros;
+    }
+}

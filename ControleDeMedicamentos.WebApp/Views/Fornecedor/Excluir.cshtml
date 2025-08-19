@@ -1,12 +1,12 @@
-﻿﻿@{
-    ViewBag.Titulo = "Exclusão de Pacientes";
+﻿﻿﻿@{
+    ViewBag.Titulo = "Exclusão de Fornecedores";
 }
 
-@model ExcluirPacienteViewModel;
+@model ExcluirFornecedorViewModel;
 
 <div class="row justify-content-center">
     <form class="col-lg-8 col-xl-6" asp-action="Excluir" method="post">
-        <p>Deseja realmente excluir o paciente "@Model.Nome"?</p>
+        <p>Deseja realmente excluir o fornecedor "@Model.Nome"?</p>
 
         <input asp-for="Nome" type="hidden" />
 

@@ -9,7 +9,7 @@ namespace ControleDeMedicamentos.WebApp.Controllers;
 public class MedicamentoController : Controller
 {
     private readonly RepositorioMedicamentoEmArquivo repositorioModulov;
-    //private RepositorioMedicamentoEmArquivo repositorioModuloMedicamento;
+    private RepositorioMedicamentoEmArquivo repositorioModuloMedicamento;
 
     // Inversão de controle
     public MedicamentoController(RepositorioMedicamentoEmArquivo repositorioMedicamento)
