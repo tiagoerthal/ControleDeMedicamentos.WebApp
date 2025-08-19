@@ -38,7 +38,6 @@ public class MedicamentoController : Controller
         List<Fornecedor> fornecedores = repositorioModuloFornecedor.SelecionarRegistros();
 
         CadastrarMedicamentoViewModel cadastrarVm = new CadastrarMedicamentoViewModel(fornecedores);
-        //var cadastrarVm = new CadastrarMedicamentoViewModel(fornecedores);
 
         return View(cadastrarVm);
     }
@@ -50,11 +49,6 @@ public class MedicamentoController : Controller
 
         if (fornecedorSelecionado == null)
             return RedirectToAction(nameof(Index));
-
-        //if (!ModelState.IsValid)
-        //    return View(cadastrarVm);
-
-        //var fornecedor = repositorioModuloFornecedor.SelecionarRegistroPorId(cadastrarVm.FornecedorId);
 
         var entidade = new Medicamento(
             cadastrarVm.Nome,
@@ -82,6 +76,12 @@ public class MedicamentoController : Controller
             registro.Fornecedor.Id,
             fornecedores
         );
+
+
+        //Correção necessaria pula fora
+
+
+
 
         return View(editarVm);
     }

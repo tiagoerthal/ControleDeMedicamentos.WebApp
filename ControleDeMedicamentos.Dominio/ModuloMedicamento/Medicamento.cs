@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.Dominio.Compartilhado;
 using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.Dominio.ModuloMedicamento;
@@ -10,6 +11,7 @@ public class Medicamento : EntidadeBase<Medicamento>
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string QuantidadeEmEstoque { get; set; }
+    [JsonIgnore]
     public Fornecedor Fornecedor { get; set; }
 
     protected Medicamento() { }
