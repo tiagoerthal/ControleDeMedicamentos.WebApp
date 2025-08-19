@@ -1,5 +1,7 @@
-﻿using ControleDeMedicamentos.Dominio.ModuloMedicamento;
+﻿using ControleDeMedicamentos.Dominio.ModuloFornecedor;
+using ControleDeMedicamentos.Dominio.ModuloMedicamento;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
+using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloMedicamento;
 using ControleDeMedicamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,13 +10,16 @@ namespace ControleDeMedicamentos.WebApp.Controllers;
 
 public class MedicamentoController : Controller
 {
-    private readonly RepositorioMedicamentoEmArquivo repositorioModulov;
     private RepositorioMedicamentoEmArquivo repositorioModuloMedicamento;
+    private RepositorioFornecedorEmArquivo repositorioModuloFornecedor;
 
     // Inversão de controle
-    public MedicamentoController(RepositorioMedicamentoEmArquivo repositorioMedicamento)
+    public MedicamentoController(RepositorioMedicamentoEmArquivo repositorioMedicamento,
+        RepositorioFornecedorEmArquivo repositorioFornecedor)
     {
-        this.repositorioModuloMedicamento = repositorioMedicamento;
+        ContextoDados contexto = new ContextoDados(true);
+        repositorioModuloMedicamento = repositorioMedicamento;
+        repositorioModuloFornecedor = repositorioFornecedor;
     }
 
     [HttpGet]
@@ -30,7 +35,10 @@ public class MedicamentoController : Controller
     [HttpGet]
     public IActionResult Cadastrar()
     {
-        var cadastrarVm = new CadastrarMedicamentoViewModel();
+        List<Fornecedor> fornecedores = repositorioModuloFornecedor.SelecionarRegistros();
+
+        CadastrarMedicamentoViewModel cadastrarVm = new CadastrarMedicamentoViewModel(fornecedores);
+        //var cadastrarVm = new CadastrarMedicamentoViewModel(fornecedores);
 
         return View(cadastrarVm);
     }
@@ -38,14 +46,21 @@ public class MedicamentoController : Controller
     [HttpPost]
     public IActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVm)
     {
-        if (!ModelState.IsValid)
-            return View(cadastrarVm);
+        Fornecedor fornecedorSelecionado = repositorioModuloFornecedor.SelecionarRegistroPorId(cadastrarVm.FornecedorId);
+
+        if (fornecedorSelecionado == null)
+            return RedirectToAction(nameof(Index));
+
+        //if (!ModelState.IsValid)
+        //    return View(cadastrarVm);
+
+        //var fornecedor = repositorioModuloFornecedor.SelecionarRegistroPorId(cadastrarVm.FornecedorId);
 
         var entidade = new Medicamento(
             cadastrarVm.Nome,
             cadastrarVm.Descricao,
-            cadastrarVm.QuantidadeEmEstoque
-        //cadastrarVm.Fornecedor
+            cadastrarVm.QuantidadeEmEstoque,
+            fornecedorSelecionado
         );
 
         repositorioModuloMedicamento.CadastrarRegistro(entidade);
@@ -57,29 +72,33 @@ public class MedicamentoController : Controller
     public IActionResult Editar(Guid id)
     {
         var registro = repositorioModuloMedicamento.SelecionarRegistroPorId(id);
+        List<Fornecedor> fornecedores = repositorioModuloFornecedor.SelecionarRegistros();
 
         var editarVm = new EditarMedicamentoViewModel(
             registro.Id,
             registro.Nome,
             registro.Descricao,
-            registro.QuantidadeEmEstoque
-        //registro.Fornecedor
+            registro.QuantidadeEmEstoque,
+            registro.Fornecedor.Id,
+            fornecedores
         );
 
         return View(editarVm);
     }
 
     [HttpPost]
-    public IActionResult Editar(EditarMedicamentoViewModel editarVm)
+    public IActionResult Editar(Guid id, EditarMedicamentoViewModel editarVm)
     {
+        Fornecedor fornecedorSelecionado = repositorioModuloFornecedor.SelecionarRegistroPorId(editarVm.FornecedorId);
+
         if (!ModelState.IsValid)
             return View(editarVm);
 
         var medicamentoEditado = new Medicamento(
             editarVm.Nome,
             editarVm.Descricao,
-            editarVm.QuantidadeEmEstoque
-        //registro.Fornecedor
+            editarVm.QuantidadeEmEstoque,
+            fornecedorSelecionado
 
         );
 

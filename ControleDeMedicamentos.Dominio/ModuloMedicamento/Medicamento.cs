@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.Dominio.Compartilhado;
+using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
@@ -9,16 +10,17 @@ public class Medicamento : EntidadeBase<Medicamento>
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string QuantidadeEmEstoque { get; set; }
-    //Forncedor Forncedor
+    public Fornecedor Fornecedor { get; set; }
 
     protected Medicamento() { }
 
-    public Medicamento(string nome, string descricao, string quantidadeEmEstoque) : this()
+    public Medicamento(string nome, string descricao, string quantidadeEmEstoque, Fornecedor fornecedor) : this()
     {
         Id = Guid.NewGuid();
         Nome = nome;
         Descricao = descricao;
         QuantidadeEmEstoque = quantidadeEmEstoque;
+        Fornecedor = fornecedor;
     }
 
     public override void AtualizarRegistro(Medicamento registroEditado)
@@ -26,6 +28,7 @@ public class Medicamento : EntidadeBase<Medicamento>
         Nome = registroEditado.Nome;
         Descricao = registroEditado.Descricao;
         QuantidadeEmEstoque = registroEditado.QuantidadeEmEstoque;
+        Fornecedor = registroEditado.Fornecedor;
     }
 
     public override string Validar()
@@ -37,6 +40,9 @@ public class Medicamento : EntidadeBase<Medicamento>
 
         else if (Nome.Length < 2 || Nome.Length > 100)
             erros += "O campo 'Nome' deve conter entre 3 e 100 caracteres.\n";
+
+        if (Fornecedor == null)
+            erros += "O campo \"Fornecedor\" é obrigatório.";
 
         if (string.IsNullOrWhiteSpace(Descricao))
             erros += "O campo 'Descricao' é obrigatório.\n";

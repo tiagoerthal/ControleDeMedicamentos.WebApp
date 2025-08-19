@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿﻿@{
     ViewBag.Titulo = "Visualização de Medicamentos";
 }
 
@@ -16,9 +16,9 @@
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">@m.Nome</h5>
-                    <p class="card-text mb-0"><strong>Telefone:</strong> @m.Descricao</p>
-                    <p class="card-text mb-0"><strong>Cartão do Sus:</strong> @m.QuantidadeEmEstoque</p>
-                    @* <p class="card-text mb-0"><strong>CPF:</strong> @m.Cpf</p> *@
+                    <p class="card-text mb-0"><strong>Descrição:</strong> @m.Descricao</p>
+                    <p class="card-text mb-0"><strong>Quantidade em estoque:</strong> @m.QuantidadeEmEstoque</p>
+                    <p class="card-text mb-0"><strong>Fornecedor:</strong> @m.NomeFornecedor</p>
                 </div>
                 <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
                     <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center"

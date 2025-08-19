@@ -49,21 +49,21 @@ public class EditarFornecedorViewModel
     )]
     public string Telefone { get; set; }
 
-    [Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
+    [Required(ErrorMessage = "O campo 'Cnpj' é obrigatório.")]
     [RegularExpression(
-        @"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
-        ErrorMessage = "O campo 'CPF' deve seguir o formato 000.000.000-00."
+        @"^\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}$",
+        ErrorMessage = "O campo 'Cnpj' deve Conter 14 digitos."
     )]
-    public string Cpf { get; set; }
+    public string Cnpj { get; set; }
 
     public EditarFornecedorViewModel() { }
 
-    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string cpf) : this()
+    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string cnpj) : this()
     {
         Id = id;
         Nome = nome;
         Telefone = telefone;
-        Cpf = cpf;
+        Cnpj = cnpj;
     }
 }
 

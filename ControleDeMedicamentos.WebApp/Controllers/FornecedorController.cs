@@ -75,7 +75,7 @@ public class FornecedorController : Controller
         var fornecedorEditado = new Fornecedor(
             editarVm.Nome,
             editarVm.Telefone,
-            editarVm.Cpf
+            editarVm.Cnpj
             );
 
         //Correção cpf = cnpj

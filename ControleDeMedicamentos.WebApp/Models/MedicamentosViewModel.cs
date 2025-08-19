@@ -1,5 +1,6 @@
-﻿//using ControleDeMedicamentos.Dominio.Fornecedor;
+﻿using ControleDeMedicamentos.Dominio.ModuloFornecedor;
 using ControleDeMedicamentos.Dominio.ModuloMedicamento;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
 
 namespace ControleDeMedicamentos.WebApp.Models;
@@ -10,6 +11,7 @@ public class CadastrarMedicamentoViewModel
     [StringLength(100, MinimumLength = 3, ErrorMessage =
         "O campo 'Nome' deve conter entre 2 e 100 caracteres.")]
     public string Nome { get; set; }
+
 
     [Required(ErrorMessage = "O campo 'Descrição' é obrigatório.")]
     [StringLength(100, MinimumLength = 3, ErrorMessage =
@@ -23,23 +25,33 @@ public class CadastrarMedicamentoViewModel
 
     public string QuantidadeEmEstoque { get; set; }
 
-    //[Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
-    //[RegularExpression(
-    //    @"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
-    //    ErrorMessage = "O campo 'CPF' deve seguir o formato 000.000.000-00."
-    //)]
-    //public string Cpf { get; set; }
 
-    public CadastrarMedicamentoViewModel() { }
 
-    public CadastrarMedicamentoViewModel(string nome, string descricao, string quantidadeEmEstoque) : this()//string cpf
+    [Required(ErrorMessage = "O campo \"Fornecedores\" é obrigatório.")]
+    public Guid FornecedorId { get; set; }
+    public List<SelecionarFornecedorViewModel> FornecedorDisponiveis { get; set; }
+
+    public CadastrarMedicamentoViewModel()
     {
-        Nome = nome;
-        Descricao = descricao;
-        QuantidadeEmEstoque = quantidadeEmEstoque;
-        //Cpf = cpf;
+        FornecedorDisponiveis = new List<SelecionarFornecedorViewModel>();
+    }
+    public CadastrarMedicamentoViewModel(List<Fornecedor> fornecedores) : this()
+    {
+        //if (fornecedores == null) return;
+
+        //foreach (var f in fornecedores)
+        //    FornecedoresDisponiveis.Add(new SelecionarFornecedorViewModel(f.Id, f.Nome));
+        foreach (Fornecedor f in fornecedores)
+        {
+            SelecionarFornecedorViewModel selecionarVm =
+                new SelecionarFornecedorViewModel(f.Id, f.Nome);
+
+            FornecedorDisponiveis.Add(selecionarVm);
+        }
     }
 }
+
+
 
 public class EditarMedicamentoViewModel
 {
@@ -62,22 +74,30 @@ public class EditarMedicamentoViewModel
 
     public string QuantidadeEmEstoque { get; set; }
 
-    //[Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
-    //[RegularExpression(
-    //    @"^\d{3}\.\d{3}\.\d{3}-\d{2}$",
-    //    ErrorMessage = "O campo 'CPF' deve seguir o formato 000.000.000-00."
-    //)]
-    //public string Cpf { get; set; }
+    public Guid FornecedorId { get; set; }
+    public List<SelecionarFornecedorViewModel> FornecedorDisponiveis { get; set; }
 
-    public EditarMedicamentoViewModel() { }
-
-    public EditarMedicamentoViewModel(Guid id, string nome, string descricao, string quantidadeEmEstoque) : this()//string cpf
+    public EditarMedicamentoViewModel()
     {
+        FornecedorDisponiveis = new List<SelecionarFornecedorViewModel>();
+    }
+
+    public EditarMedicamentoViewModel(Guid id, string nome, string descricao, string quantidadeEmEstoque,
+        Guid fornecedorId, List<Fornecedor> fornecedores) : this()//string cpf
+    {
+        foreach (Fornecedor f in fornecedores)
+        {
+            SelecionarFornecedorViewModel selecionarVm =
+                new SelecionarFornecedorViewModel(f.Id, f.Nome);
+
+            FornecedorDisponiveis.Add(selecionarVm);
+        }
+
         Id = id;
         Nome = nome;
         Descricao = descricao;
         QuantidadeEmEstoque = quantidadeEmEstoque;
-        //Cpf = cpf;
+        fornecedorId = fornecedorId;
     }
 }
 
@@ -95,6 +115,21 @@ public class ExcluirMedicamentoViewModel
     }
 }
 
+
+public class SelecionarFornecedorViewModel
+{
+    public Guid Id { get; set; }
+    public string Nome { get; set; }
+
+    public SelecionarFornecedorViewModel(Guid id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
+
+
+
 public class VisualizarMedicamentoViewModel
 {
     public List<DetalhesMedicamentoViewModel> Registros { get; }
@@ -109,8 +144,9 @@ public class VisualizarMedicamentoViewModel
                 m.Id,
                 m.Nome,
                 m.Descricao,
-                m.QuantidadeEmEstoque
-            // m.Cpf
+                m.QuantidadeEmEstoque,
+                //m.Fornecedor.Nome
+                m.Fornecedor?.Nome ?? "Fornecedor não informado"
             );
 
             Registros.Add(detalhesVM);
@@ -124,14 +160,14 @@ public class DetalhesMedicamentoViewModel
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string QuantidadeEmEstoque { get; set; }
-    //Forncedor Forncedor
+    public string NomeFornecedor { get; set; }
 
-    public DetalhesMedicamentoViewModel(Guid id, string nome, string descricao, string quantidadeEmEstoque)
+    public DetalhesMedicamentoViewModel(Guid id, string nome, string descricao, string quantidadeEmEstoque, string nomeFornecedor)
     {
         Id = id;
         Nome = nome;
         Descricao = descricao;
         QuantidadeEmEstoque = quantidadeEmEstoque;
-        //Cpf = cpf;
+        NomeFornecedor = nomeFornecedor;
     }
 }
