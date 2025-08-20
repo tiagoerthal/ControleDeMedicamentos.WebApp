@@ -10,7 +10,7 @@ public class Fornecedor : EntidadeBase<Fornecedor>
     public string Telefone { get; set; }
     public string Cnpj { get; set; }
 
-    protected Fornecedor() { }
+    public Fornecedor() { }
 
     public Fornecedor(string nome, string telefone, string cnpj) : this()
     {

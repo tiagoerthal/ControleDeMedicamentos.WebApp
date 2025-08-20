@@ -11,10 +11,9 @@ public class Medicamento : EntidadeBase<Medicamento>
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string QuantidadeEmEstoque { get; set; }
-    [JsonIgnore]
     public Fornecedor Fornecedor { get; set; }
 
-    protected Medicamento() { }
+    public Medicamento() { }
 
     public Medicamento(string nome, string descricao, string quantidadeEmEstoque, Fornecedor fornecedor) : this()
     {
