@@ -19,19 +19,9 @@
         </div>
 
         <div class="mb-3">
-            <label asp-for="QuantidadeEmEstoque" class="form-label">Quantidade em estoque</label>
-            <input class="form-control" asp-for="QuantidadeEmEstoque">
-            <span asp-validation-for="QuantidadeEmEstoque" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
             <label asp-for="FornecedorId" class="form-label">Fornecedor</label>
-            <select class="form-select" name="FornecedorId">
-                @foreach (SelecionarFornecedorViewModel f in Model.FornecedorDisponiveis)
-                {
-                    <option value="@f.Id">@f.Nome</option>
-                }
-            </select>
+            <select class="form-select" asp-for="FornecedorId" asp-items="@Model.FornecedoresDisponiveis"></select>
+            <span asp-validation-for="FornecedorId" class="text-danger"></span>
         </div>
 
         <div class="d-flex gap-2 justify-content-end">
