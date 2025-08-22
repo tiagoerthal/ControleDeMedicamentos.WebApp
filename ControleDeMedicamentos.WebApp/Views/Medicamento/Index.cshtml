@@ -1,8 +1,8 @@
-﻿﻿﻿@{
+﻿@{
     ViewBag.Titulo = "Visualização de Medicamentos";
 }
 
-@model VisualizarMedicamentoViewModel;
+@model VisualizarMedicamentosViewModel;
 
 <a class="btn btn-primary" asp-action="Cadastrar">
     <i class="bi bi-plus"></i>
@@ -17,8 +17,13 @@
                 <div class="card-body">
                     <h5 class="card-title">@m.Nome</h5>
                     <p class="card-text mb-0"><strong>Descrição:</strong> @m.Descricao</p>
-                    <p class="card-text mb-0"><strong>Quantidade em estoque:</strong> @m.QuantidadeEmEstoque</p>
-                    <p class="card-text mb-0"><strong>Fornecedor:</strong> @m.NomeFornecedor</p>
+                    <p class="card-text mb-0"><strong>Fornecedor:</strong> @m.Fornecedor</p>
+                    <p class="card-text mb-0"><strong>Quantidade em Estoque:</strong> @m.QuantidadeEmEstoque</p>
+
+                    @if (m.EmFalta)
+                    {
+                        <p class="card-text mb-0"><strong>Em falta!</strong></p>
+                    }
                 </div>
                 <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
                     <a class="btn btn-sm btn-primary rounded-circle d-flex justify-content-center align-items-center"
