@@ -1,4 +1,4 @@
-﻿﻿﻿
+﻿﻿
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,24 +23,23 @@
             <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarNav">
                 <ul class="d-flex gap-2 navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-2" href="/Fornecedor">Fornecedores</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="Funcionario" asp-action="Index">Funcionários</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-4" href="/Paciente">Pacientes</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="Fornecedor" asp-action="Index">Fornecedores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-4" href="/Medicamento">Medicamentos</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="Paciente" asp-action="Index">Pacientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-4" href="/Funcionario">Funcionarios</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="Medicamento" asp-action="Index">Medicamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-4" href="/Prescrição">Prescrições</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="Prescricao" asp-action="Index">Prescrições</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-primary w-100 px-4" href="/Estoque">Estoques</a>
+                        <a class="btn btn-primary w-100 px-4" asp-controller="RequisicaoMedicamento" asp-action="Index">Estoque</a>
                     </li>
-
                 </ul>
             </div>
         </div>
