@@ -119,5 +119,5 @@ Inclui:
 - Não permitir requisições acima do estoque disponível  
 - Subtração automática do estoque
 
-- Tecnologias[![Tecnologias](https://skillicons.dev/icons?i=cs,dotnet,visualstudio,git,github)](https://skillicons.dev)
-0 commit commentsComments0 (0)Lock conversation
+- Tecnologias
+  [![Tecnologias](https://skillicons.dev/icons?i=cs,dotnet,visualstudio,git,github)](https://skillicons.dev)
