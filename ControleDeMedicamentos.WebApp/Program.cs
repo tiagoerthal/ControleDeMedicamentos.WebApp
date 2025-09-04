@@ -18,7 +18,18 @@ public class Program
         // Injeção de dependências da Microsoft.
         builder.Services.AddControllersWithViews();
 
+        // Middleware - Funções que executam durante cada requisição e resposta HTTP
+
         var app = builder.Build();
+
+        if (app.Environment.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
+        }
+        else
+        {
+            app.UseExceptionHandler("/Home/Error");
+        }
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
