@@ -1,6 +1,6 @@
 ﻿using ControleDeMedicamentos.Dominio.ModuloPaciente;
-using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
 using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloPaciente;
+using ControleDeMedicamentos.Infraestrutura.SqlServer.ModuloPaciente;
 using ControleDeMedicamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,20 +8,19 @@ namespace ControleDeMedicamentos.WebApp.Controllers;
 
 public class PacienteController : Controller
 {
-    private readonly RepositorioPacienteEmArquivo repositorioModuloPaciente;
+    private readonly RepositorioPacienteEmSql repositorioPaciente;
 
-    // Inversão de controle
-    public PacienteController(RepositorioPacienteEmArquivo repositorioPaciente)
+    public PacienteController(RepositorioPacienteEmSql repositorioPaciente)
     {
-        this.repositorioModuloPaciente = repositorioPaciente;
+        this.repositorioPaciente = repositorioPaciente;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-        var pacientes = repositorioModuloPaciente.SelecionarRegistros();
+        var Pacientes = repositorioPaciente.SelecionarRegistros();
 
-        var visualizarVm = new VisualizarPacienteViewModel(pacientes);
+        var visualizarVm = new VisualizarPacienteViewModel(Pacientes);
 
         return View(visualizarVm);
     }
@@ -47,7 +46,7 @@ public class PacienteController : Controller
             cadastrarVm.Cpf
         );
 
-        repositorioModuloPaciente.CadastrarRegistro(entidade);
+        repositorioPaciente.CadastrarRegistro(entidade);
 
         return RedirectToAction(nameof(Index));
     }
@@ -55,7 +54,7 @@ public class PacienteController : Controller
     [HttpGet]
     public IActionResult Editar(Guid id)
     {
-        var registro = repositorioModuloPaciente.SelecionarRegistroPorId(id);
+        var registro = repositorioPaciente.SelecionarRegistroPorId(id);
 
         var editarVm = new EditarPacienteViewModel(
             registro.Id,
@@ -74,14 +73,14 @@ public class PacienteController : Controller
         if (!ModelState.IsValid)
             return View(editarVm);
 
-        var pacienteEditado = new Paciente(
+        var PacienteEditado = new Paciente(
             editarVm.Nome,
             editarVm.Telefone,
             editarVm.CartaoDoSus,
             editarVm.Cpf
         );
 
-        repositorioModuloPaciente.EditarRegistro(editarVm.Id, pacienteEditado);
+        repositorioPaciente.EditarRegistro(editarVm.Id, PacienteEditado);
 
         return RedirectToAction(nameof(Index));
     }
@@ -89,7 +88,7 @@ public class PacienteController : Controller
     [HttpGet]
     public IActionResult Excluir(Guid id)
     {
-        var registro = repositorioModuloPaciente.SelecionarRegistroPorId(id);
+        var registro = repositorioPaciente.SelecionarRegistroPorId(id);
 
         var excluirVm = new ExcluirPacienteViewModel(
             registro.Id,
@@ -102,7 +101,7 @@ public class PacienteController : Controller
     [HttpPost]
     public IActionResult Excluir(ExcluirPacienteViewModel excluirVm)
     {
-        repositorioModuloPaciente.ExcluirRegistro(excluirVm.Id);
+        repositorioPaciente.ExcluirRegistro(excluirVm.Id);
 
         return RedirectToAction(nameof(Index));
     }
