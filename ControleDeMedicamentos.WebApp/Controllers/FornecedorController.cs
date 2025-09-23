@@ -1,6 +1,5 @@
 ﻿using ControleDeMedicamentos.Dominio.ModuloFornecedor;
-using ControleDeMedicamentos.Infraestrutura.Arquivos.Compartilhado;
-using ControleDeMedicamentos.Infraestrutura.Arquivos.ModuloFornecedor;
+using ControleDeMedicamentos.Infraestrutura.SqlServer.ModuloFornecedor;
 using ControleDeMedicamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,10 +7,9 @@ namespace ControleDeMedicamentos.WebApp.Controllers;
 
 public class FornecedorController : Controller
 {
-    private readonly RepositorioFornecedorEmArquivo repositorioFornecedor;
+    private readonly RepositorioFornecedorEmSql repositorioFornecedor;
 
-    // Inversão de controle
-    public FornecedorController(RepositorioFornecedorEmArquivo repositorioFornecedor)
+    public FornecedorController(RepositorioFornecedorEmSql repositorioFornecedor)
     {
         this.repositorioFornecedor = repositorioFornecedor;
     }
@@ -19,9 +17,9 @@ public class FornecedorController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var fornecedores = repositorioFornecedor.SelecionarRegistros();
+        var Fornecedors = repositorioFornecedor.SelecionarRegistros();
 
-        var visualizarVm = new VisualizarFornecedoresViewModel(fornecedores);
+        var visualizarVm = new VisualizarFornecedoresViewModel(Fornecedors);
 
         return View(visualizarVm);
     }
@@ -76,10 +74,7 @@ public class FornecedorController : Controller
             editarVm.Nome,
             editarVm.Telefone,
             editarVm.Cnpj
-            );
-
-        //Correção cpf = cnpj
-
+        );
 
         repositorioFornecedor.EditarRegistro(editarVm.Id, fornecedorEditado);
 
