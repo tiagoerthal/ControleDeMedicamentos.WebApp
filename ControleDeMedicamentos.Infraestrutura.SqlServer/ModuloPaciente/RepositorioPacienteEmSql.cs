@@ -26,7 +26,7 @@ public class RepositorioPacienteEmSql
             novoRegistro.Id,
             novoRegistro.Nome,
             novoRegistro.Telefone,
-            novoRegistro.CartaoDoSus,
+            novoRegistro.CartaoSus,
             novoRegistro.Cpf
         });
     }
@@ -47,7 +47,7 @@ public class RepositorioPacienteEmSql
             Id = idSelecionado,
             registroAtualizado.Nome,
             registroAtualizado.Telefone,
-            registroAtualizado.CartaoDoSus,
+            registroAtualizado.CartaoSus,
             registroAtualizado.Cpf
         });
 

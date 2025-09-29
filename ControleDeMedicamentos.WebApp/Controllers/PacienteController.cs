@@ -41,8 +41,8 @@ public class PacienteController : Controller
         var entidade = new Paciente(
             cadastrarVm.Nome,
             cadastrarVm.Telefone,
-            cadastrarVm.CartaoDoSus,
-            cadastrarVm.Cpf
+            cadastrarVm.Cpf,
+            cadastrarVm.CartaoSus
         );
 
         repositorioPaciente.CadastrarRegistro(entidade);
@@ -59,7 +59,7 @@ public class PacienteController : Controller
             registro.Id,
             registro.Nome,
             registro.Telefone,
-            registro.CartaoDoSus,
+            registro.CartaoSus,
             registro.Cpf
         );
 
@@ -75,8 +75,8 @@ public class PacienteController : Controller
         var PacienteEditado = new Paciente(
             editarVm.Nome,
             editarVm.Telefone,
-            editarVm.CartaoDoSus,
-            editarVm.Cpf
+            editarVm.Cpf,
+            editarVm.CartaoSus
         );
 
         repositorioPaciente.EditarRegistro(editarVm.Id, PacienteEditado);

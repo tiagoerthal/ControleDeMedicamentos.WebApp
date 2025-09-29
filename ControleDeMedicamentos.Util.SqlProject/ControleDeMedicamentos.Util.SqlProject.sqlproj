@@ -62,5 +62,7 @@
     <Build Include="TbFornecedor.sql" />
     <Build Include="TbFuncionario.sql" />
     <Build Include="TbMedicamento.sql" />
+    <Build Include="TbMedicamentoPrescrito.sql" />
+    <Build Include="TbPrescricao.sql" />
   </ItemGroup>
 </Project>

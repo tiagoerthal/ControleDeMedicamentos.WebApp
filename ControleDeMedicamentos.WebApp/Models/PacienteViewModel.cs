@@ -17,10 +17,13 @@ public class CadastrarPacienteViewModel
     )]
     public string Telefone { get; set; }
 
-    [Required(ErrorMessage = "O campo 'Cartão do Sus' é obrigatório.")]
-    [StringLength(15, MinimumLength = 2, ErrorMessage = "O campo 'Cartão do Sus' deve conter 15 caracteres.")]
+    [Required(ErrorMessage = "O campo 'Cartão do SUS' é obrigatório.")]
+    [RegularExpression(
+     @"^\d{3}\s?\d{4}\s?\d{4}\s?\d{4}$",
+     ErrorMessage = "O campo 'Cartão do SUS' deve seguir o formato 000 0000 0000 0000."
+    )]
 
-    public string CartaoDoSus { get; set; }
+    public string CartaoSus { get; set; }
 
     [Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
     [RegularExpression(
@@ -31,11 +34,11 @@ public class CadastrarPacienteViewModel
 
     public CadastrarPacienteViewModel() { }
 
-    public CadastrarPacienteViewModel(string nome, string telefone, string cartaoDoSus, string cpf) : this()
+    public CadastrarPacienteViewModel(string nome, string telefone, string cartaoSus, string cpf) : this()
     {
         Nome = nome;
         Telefone = telefone;
-        CartaoDoSus = cartaoDoSus;
+        CartaoSus = cartaoSus;
         Cpf = cpf;
     }
 }
@@ -56,12 +59,12 @@ public class EditarPacienteViewModel
     public string Telefone { get; set; }
 
 
-    [Required(ErrorMessage = "O campo 'Telefone' é obrigatório.")]
+    [Required(ErrorMessage = "O campo 'Cartão do SUS' é obrigatório.")]
     [RegularExpression(
-       @"^\(?\d{15}\)$",
-       ErrorMessage = "O campo 'CartaoDoSus' deve conter 15 carácteres."
-   )]
-    public string CartaoDoSus { get; set; }
+        @"^\d{3}\s?\d{4}\s?\d{4}\s?\d{4}$",
+        ErrorMessage = "O campo 'Cartão do SUS' deve seguir o formato 000 0000 0000 0000."
+    )]
+    public string CartaoSus { get; set; }
 
 
     [Required(ErrorMessage = "O campo 'CPF' é obrigatório.")]
@@ -73,12 +76,12 @@ public class EditarPacienteViewModel
 
     public EditarPacienteViewModel() { }
 
-    public EditarPacienteViewModel(Guid id, string nome, string telefone, string cartaoDoSus, string cpf) : this()
+    public EditarPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus, string cpf) : this()
     {
         Id = id;
         Nome = nome;
         Telefone = telefone;
-        CartaoDoSus = cartaoDoSus;
+        CartaoSus = cartaoSus;
         Cpf = cpf;
     }
 }
@@ -111,7 +114,7 @@ public class VisualizarPacienteViewModel
                 p.Id,
                 p.Nome,
                 p.Telefone,
-                p.CartaoDoSus,
+                p.CartaoSus,
                 p.Cpf
             );
 
@@ -125,15 +128,15 @@ public class DetalhesPacienteViewModel
     public Guid Id { get; set; }
     public string Nome { get; set; }
     public string Telefone { get; set; }
-    public string CartaoDoSus { get; set; }
+    public string CartaoSus { get; set; }
     public string Cpf { get; set; }
 
-    public DetalhesPacienteViewModel(Guid id, string nome, string telefone, string cartaoDoSus, string cpf)
+    public DetalhesPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus, string cpf)
     {
         Id = id;
         Nome = nome;
         Telefone = telefone;
-        CartaoDoSus = cartaoDoSus;
+        CartaoSus = cartaoSus;
         Cpf = cpf;
     }
 }

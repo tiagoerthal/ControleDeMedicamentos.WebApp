@@ -12,7 +12,7 @@ public class Paciente : EntidadeBase<Paciente>
 {
     public string Nome { get; set; }
     public string Telefone { get; set; }
-    public string CartaoDoSus { get; set; }
+    public string CartaoSus { get; set; }
     public string Cpf { get; set; }
 
     protected Paciente() { }
@@ -22,7 +22,7 @@ public class Paciente : EntidadeBase<Paciente>
         Id = Guid.NewGuid();
         Nome = nome;
         Telefone = telefone;
-        CartaoDoSus = cartaoDoSus;
+        CartaoSus = cartaoDoSus;
         Cpf = cpf;
     }
 
@@ -30,7 +30,7 @@ public class Paciente : EntidadeBase<Paciente>
     {
         Nome = registroEditado.Nome;
         Telefone = registroEditado.Telefone;
-        CartaoDoSus = registroEditado.CartaoDoSus;
+        CartaoSus = registroEditado.CartaoSus;
         Cpf = registroEditado.Cpf;
     }
 
@@ -50,10 +50,10 @@ public class Paciente : EntidadeBase<Paciente>
         else if (!Regex.IsMatch(Telefone, @"^\(?\d{2}\)?\s?(9\d{4}|\d{4})-?\d{4}$"))
             erros += "O campo 'Telefone' deve seguir o padrão (DDD) 0000-0000 ou (DDD) 00000-0000.\n";
 
-        if (string.IsNullOrWhiteSpace(CartaoDoSus))
+        if (string.IsNullOrWhiteSpace(CartaoSus))
             erros += "O campo 'Cartão do SUS' é obrigatório.\n";
 
-        else if (!Regex.IsMatch(CartaoDoSus, @"^\d{15}$"))
+        else if (!Regex.IsMatch(CartaoSus, @"^\d{15}$"))
             erros += "O campo 'Cartão do SUS' deve conter 15 digitos.\n";
 
         if (string.IsNullOrWhiteSpace(Cpf))
